@@ -89,12 +89,18 @@ const Navbar = () => {
         <Link
           to="/Login"
           className={`${mobileNav} px-8 mb-8 text-3xl font-semibold py-2 border border-blue-500 rounded-md hover:bg-white text-white hover:text-zinc-800 transition-all duration-300`}
+          onClick={() =>
+            mobileNav === "hidden" ? setMobileNav("block") : setMobileNav("hidden")
+          }
         >
           LogIn
         </Link>
         <Link
           to="/SignUp"
           className={`${mobileNav} bg-blue-500 text-3xl font-semibold mb-8 px-8 py-2 rounded-md hover:bg-white hover:text-zinc-800 transition-all duration-300`}
+          onClick={() =>
+            mobileNav === "hidden" ? setMobileNav("block") : setMobileNav("hidden")
+          }
         >
           Sign Up
         </Link>
