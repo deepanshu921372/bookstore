@@ -1,10 +1,11 @@
 import React from "react";
 import hero from "../../assets/hero.png";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <div className="h-[76.6vh] flex">
-      <div className="lg:w-3/6 w-full flex flex-col items-center justify-center lg:items-start">
+    <div className="h-[76vh] lg:h-[79vh] flex flex-col md:flex-row items-center gap-10 justify-center">
+      <div className="lg:w-3/6 w-full md:mb-0 mb-12 flex flex-col items-center justify-center lg:items-start">
         <h1 className="lg:text-6xl text-4xl font-semibold text-yellow-100 lg:text-left text-center">
           Discover Your Next Great Read
         </h1>
@@ -13,13 +14,13 @@ const Hero = () => {
           inspiration in our curated collection of books.
         </p>
         <div className="mt-8">
-          <button className="text-yellow-100 lg:text-2xl text-xl font-semibold border border-yellow-100 rounded-full px-10 py-3 hover:bg-zinc-800">
+          <Link to="/all-books" className="text-yellow-100 lg:text-2xl text-xl font-semibold border border-yellow-100 rounded-full px-10 py-3 hover:bg-zinc-800">
             Discover Books
-          </button>
+          </Link>
         </div>
       </div>
       <div className="lg:w-3/6 w-full h-auto lg:h-[100%] flex items-center justify-center">
-        <img src={hero} alt="hero" className="rounded-lg ml-10" />
+        <img src={hero} alt="hero" className="rounded-lg" />
       </div>
     </div>
   );
