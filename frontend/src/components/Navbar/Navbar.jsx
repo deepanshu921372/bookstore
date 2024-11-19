@@ -65,7 +65,7 @@ const Navbar = () => {
                 ? setMobileNav("block")
                 : setMobileNav("hidden")
             }
-            className="text-2xl text-white hover:text-zinc-400"
+            className="block md:hidden text-2xl text-white hover:text-zinc-400"
           >
             <FaGripLines />
           </button>
