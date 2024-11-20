@@ -1,12 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth";
 
 
 
 const Sidebar = ({ data }) => {
+
+    const dispatch = useDispatch();
+    const history = useNavigate();
+
   return (
-    <div className="bg-zinc-800 rounded h-[90vh] p-4 flex flex-col items-center justify-between mb-4">
+    <div className="bg-zinc-800 rounded h-auto lg:h-[90vh] p-4 flex flex-col items-center justify-between mb-4">
       <div className="flex items-center flex-col justify-center">
         <img src={data.avatar} alt="profile" className="lg:h-[12vh] h-[7vh]" />
         <p className="mt-3 text-xl text-zinc-100 font-semibold">
@@ -36,7 +42,16 @@ const Sidebar = ({ data }) => {
           Settings
         </Link>
       </div>
-      <button className="bg-zinc-900 w-3/6 lg:w-full mt-4 lg:mt-0 text-white font-semibold flex items-center justify-center py-2 rounded hover:bg-zinc-900 transition-all duration-300">
+      <button className="bg-zinc-900 w-3/6 lg:w-full mt-4 lg:mt-0 text-white font-semibold flex items-center justify-center py-2 rounded hover:bg-zinc-900 transition-all duration-300"
+      onClick={() => {
+        dispatch(authActions.logout());
+        dispatch(authActions.changeRole("user"));
+        localStorage.clear("id");
+        localStorage.clear("token");
+        localStorage.clear("role");
+        history("/");
+      }}
+      >
         Logout <IoLogOutOutline className="ms-2"/>
       </button>
     </div>
