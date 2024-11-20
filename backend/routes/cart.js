@@ -27,10 +27,11 @@ router.put("/add-to-cart", authenticateToken, async (req, res) => {
 });
 
 //remove book from cart
-router.delete("/remove-from-cart", authenticateToken, async (req, res) => {
+router.put("/remove-from-cart/:bookid", authenticateToken, async (req, res) => {
   try {
-    const { bookid, id } = req.headers;
-    await User.findByIdAndUpdate(id, { $pull: { cart: bookid } });
+    const { bookid } = req.params;
+    const { id } = req.headers;
+    await User.findByIdAndUpdate(id, { $pull: { cart: bookid } });  // Changed 'id' to 'bookid'
     return res.status(200).json({
       status: "success",
       message: "Book removed from cart",
@@ -41,7 +42,7 @@ router.delete("/remove-from-cart", authenticateToken, async (req, res) => {
 });
 
 //get all cart books
-router.get("/get-all-cart-books", authenticateToken, async (req, res) => {
+router.get("/get-user-cart", authenticateToken, async (req, res) => {
   try {
     const { id } = req.headers;
     const userData = await User.findById(id).populate("cart");

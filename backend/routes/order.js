@@ -32,18 +32,16 @@ router.post("/place-order", authenticateToken, async (req, res) => {
 router.get("/get-order-history", authenticateToken, async (req, res) => {
   try {
     const { id } = req.headers;
-    const userData = await User.findById(id).populate({
-      path: "orders",
-      populate: {
-        path: "book",
-      },
-    });
-    const ordersData = userData.orders.reverse();
+    const orders = await Order.find({ user: id })
+      .populate('book')
+      .sort({ createdAt: -1 });
+    
     return res.status(200).json({
       status: "success",
-      data: ordersData,
+      data: orders,
     });
   } catch (error) {
+    console.error("Order history error:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
