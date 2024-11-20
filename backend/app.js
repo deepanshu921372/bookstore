@@ -17,8 +17,7 @@ app.use("/api/v1", User);
 app.use("/api/v1", Books);
 app.use("/api/v1", Favourite);
 app.use("/api/v1", Cart);
-app.use("/api/v1/order", orderRoutes);
-
+app.use("/api/v1", orderRoutes);
 // Creating Port
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

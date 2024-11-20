@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import { GrLanguage } from "react-icons/gr";
-import { useParams } from "react-router-dom";
 import { FaEdit, FaHeart, FaShoppingCart } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 
 const ViewBookDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const [data, setData] = useState();
@@ -42,10 +43,18 @@ const ViewBookDetails = () => {
   const handleCart = async () => {
     const response = await axios.put(
       `http://localhost:1000/api/v1/add-to-cart`,
-      {},
       { headers }
     );
     alert(response.data.message);
+  };
+
+  const deleteBook = async () => {
+    const response = await axios.delete(
+      `http://localhost:1000/api/v1/delete-book`,
+      { headers }
+    );
+    alert(response.data.message);
+    navigate("/all-books");
   };
 
   return (
@@ -77,10 +86,10 @@ const ViewBookDetails = () => {
             )}
             {isLoggedIn === true && role === "admin" && (
               <div className="flex gap-4 items-center md:flex-col">
-                <button className="bg-white rounded-full text-3xl p-2">
+                <Link to={`/update-book/${id}`} className="bg-white rounded-full text-3xl p-2">
                   <FaEdit />{" "}
-                </button>
-                <button className="bg-white rounded-full text-3xl text-red-500 p-2 lg:mt-4">
+                </Link>
+                <button className="bg-white rounded-full text-3xl text-red-500 p-2 lg:mt-4" onClick={deleteBook}>
                   <MdOutlineDelete />
                 </button>
               </div>

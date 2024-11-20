@@ -16,6 +16,8 @@ import OrderHistory from "./components/Profile/OrderHistory";
 import Settings from "./components/Profile/Settings";
 import AllOrders from "./pages/AllOrders";
 import AddBook from "./pages/AddBook";
+import UpdateBook from "./pages/UpdateBook";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -52,6 +54,7 @@ const App = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/view-book-details/:id" element={<ViewBookDetails />} />
+        <Route path="/update-book/:id" element={<UpdateBook />} />
       </Routes>
       <Footer />
     </div>
