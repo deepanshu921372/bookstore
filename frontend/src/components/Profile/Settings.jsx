@@ -14,7 +14,7 @@ const Settings = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:1000/api/v1/user-info",
+        "https://bookheaven-ovxg.onrender.com/api/v1/user-info",
         { headers }
       );
       console.log(response.data);
@@ -31,7 +31,7 @@ const Settings = () => {
 
   const submitAddress = async () => {
     const response = await axios.put(
-      "http://localhost:1000/api/v1/update-address",
+      "https://bookheaven-ovxg.onrender.com/api/v1/update-address",
       value,
       { headers }
     );

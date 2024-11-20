@@ -18,7 +18,7 @@ const ViewBookDetails = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        `http://localhost:1000/api/v1/get-book-by-id/${id}`
+        `https://bookheaven-ovxg.onrender.com/api/v1/get-book-by-id/${id}`
       );
       setData(response.data.data);
     };
@@ -33,7 +33,7 @@ const ViewBookDetails = () => {
 
   const handleFavourite = async () => {
     const response = await axios.put(
-      `http://localhost:1000/api/v1/add-book-to-favourite`,
+      `https://bookheaven-ovxg.onrender.com/api/v1/add-book-to-favourite`,
       {},
       { headers }
     );
@@ -42,7 +42,7 @@ const ViewBookDetails = () => {
 
   const handleCart = async () => {
     const response = await axios.put(
-      `http://localhost:1000/api/v1/add-to-cart`,
+      `https://bookheaven-ovxg.onrender.com/api/v1/add-to-cart`,
       { headers }
     );
     alert(response.data.message);
@@ -50,7 +50,7 @@ const ViewBookDetails = () => {
 
   const deleteBook = async () => {
     const response = await axios.delete(
-      `http://localhost:1000/api/v1/delete-book`,
+      `https://bookheaven-ovxg.onrender.com/api/v1/delete-book`,
       { headers }
     );
     alert(response.data.message);

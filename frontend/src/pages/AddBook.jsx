@@ -33,7 +33,7 @@ const AddBook = () => {
         alert("Please fill all the fields");
       } else {
         const response = await axios.post(
-          `http://localhost:1000/api/v1/add-book`,
+          `https://bookheaven-ovxg.onrender.com/api/v1/add-book`,
           data,
           { headers }
         );

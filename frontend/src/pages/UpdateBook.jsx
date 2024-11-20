@@ -36,7 +36,7 @@ const UpdateBook = () => {
         alert("Please fill all the fields");
       } else {
         const response = await axios.put(
-          `http://localhost:1000/api/v1/update-book`,
+          `https://bookheaven-ovxg.onrender.com/api/v1/update-book`,
           data,
           { headers }
         );
@@ -59,7 +59,7 @@ const UpdateBook = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        `http://localhost:1000/api/v1/get-book-by-id/${id}`
+        `https://bookheaven-ovxg.onrender.com/api/v1/get-book-by-id/${id}`
       );
       setData(response.data.data);
     };

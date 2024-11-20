@@ -12,7 +12,7 @@ const Favourites = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        `http://localhost:1000/api/v1/get-all-favourite-books`,
+        `https://bookheaven-ovxg.onrender.com/api/v1/get-all-favourite-books`,
         { headers }
       );
       setFavouritesBooks(response.data.data);
