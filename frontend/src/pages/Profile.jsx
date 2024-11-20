@@ -25,7 +25,7 @@ const Profile = () => {
     fetch();
   }, []);
   return (
-    <div className="bg-zinc-900 text-white py-8 md:px-12 px-2 gap-4 flex md:flex-row flex-col w-full h-screen">
+    <div className="bg-zinc-900 text-white py-8 md:px-12 px-2 gap-4 flex md:flex-row flex-col h-auto  w-full">
       {!profile && (
         <div className="w-full h-[100%] flex items-center justify-center">
           <Loader />

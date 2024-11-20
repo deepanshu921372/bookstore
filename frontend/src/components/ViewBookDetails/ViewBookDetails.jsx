@@ -3,12 +3,17 @@ import axios from "axios";
 import Loader from "../Loader/Loader";
 import { GrLanguage } from "react-icons/gr";
 import { useParams } from "react-router-dom";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { FaEdit, FaHeart, FaShoppingCart } from "react-icons/fa";
+import { MdOutlineDelete } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const ViewBookDetails = () => {
   const { id } = useParams();
 
   const [data, setData] = useState();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const role = useSelector((state) => state.auth.role);
+
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -19,27 +24,67 @@ const ViewBookDetails = () => {
     fetch();
   }, []);
 
+  const headers = {
+    id: localStorage.getItem("id"),
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+    bookId: id,
+  };
+
+  const handleFavourite = async () => {
+    const response = await axios.put(
+      `http://localhost:1000/api/v1/add-book-to-favourite`,
+      {},
+      { headers }
+    );
+    alert(response.data.message);
+  };
+
+  const handleCart = async () => {
+    const response = await axios.put(
+      `http://localhost:1000/api/v1/add-to-cart`,
+      {},
+      { headers }
+    );
+    alert(response.data.message);
+  };
+
   return (
     <>
       {data && (
         <div className="px-4 md:px-12 py-8 bg-zinc-900 flex gap-8 md:flex-row flex-col">
-          <div className="w-full lg:w-3/6">
+          <div className="bg-zinc-800 rounded px-4 py-12  w-full lg:w-4/6 flex flex-col lg:flex-row justify-around gap-8">
             {" "}
-            <div className="rounded flex justify-around gap-8 p-12 bg-zinc-800">
             <img
               src={data?.url}
               alt="url"
               className="h-[50vh] lg:h-[70vh] rounded"
             />
-            <div className="flex md:flex-col">
-              <button className="bg-white rounded-full text-red-500 text-3xl p-2">
-                <FaHeart />
-              </button>
-              <button className="bg-white rounded-full text-3xl text-blue-500 p-2 mt-4">
-                <FaShoppingCart />
-              </button>
-            </div>
-            </div>
+            {isLoggedIn === true && role === "user" && (
+              <div className="flex gap-4 items-center justify-center lg:justify-start md:flex-col">
+                <button
+                  className="bg-white rounded-full text-red-500 text-3xl p-2"
+                  onClick={handleFavourite}
+                >
+                  <FaHeart />
+                </button>
+                <button
+                  className="bg-white rounded-full text-3xl text-blue-500 p-2 lg:mt-4"
+                  onClick={handleCart}
+                >
+                  <FaShoppingCart />
+                </button>
+              </div>
+            )}
+            {isLoggedIn === true && role === "admin" && (
+              <div className="flex gap-4 items-center md:flex-col">
+                <button className="bg-white rounded-full text-3xl p-2">
+                  <FaEdit />{" "}
+                </button>
+                <button className="bg-white rounded-full text-3xl text-red-500 p-2 lg:mt-4">
+                  <MdOutlineDelete />
+                </button>
+              </div>
+            )}
           </div>
           <div className="p-4 w-full lg:w-3/6">
             <h1 className="text-4xl text-zinc-300 font-semibold">

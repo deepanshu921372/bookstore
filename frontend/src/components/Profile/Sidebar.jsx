@@ -6,9 +6,9 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 const Sidebar = ({ data }) => {
   return (
-    <div className="bg-zinc-800 rounded h-[90%] p-4 flex flex-col items-center justify-between">
+    <div className="bg-zinc-800 rounded h-[90vh] p-4 flex flex-col items-center justify-between mb-4">
       <div className="flex items-center flex-col justify-center">
-        <img src={data.avatar} alt="profile" className="h-[12vh]" />
+        <img src={data.avatar} alt="profile" className="lg:h-[12vh] h-[7vh]" />
         <p className="mt-3 text-xl text-zinc-100 font-semibold">
         {data.username}
       </p>
