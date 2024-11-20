@@ -98,7 +98,7 @@ const OrderHistory = () => {
                 <h1 className="font-semibold text-green-500">
                   {items.status === "Order placed" ? (
                     <div className="text-yellow-500">{items.status}</div>
-                  ) : items.status === "Canceled" ? (
+                  ) : items.status === "Cancelled" ? (
                     <div className="text-red-500">{items.status}</div>
                   ) : (
                     items.status
