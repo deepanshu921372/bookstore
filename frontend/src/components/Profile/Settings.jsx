@@ -17,7 +17,6 @@ const Settings = () => {
         "https://bookheaven-ovxg.onrender.com/api/v1/user-info",
         { headers }
       );
-      console.log(response.data);
       setProfileData(response.data);
       setValue({ address: response.data.address });
     };
