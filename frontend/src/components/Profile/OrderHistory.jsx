@@ -20,10 +20,11 @@ const OrderHistory = () => {
           "https://bookheaven-ovxg.onrender.com/api/v1/order/get-order-history",
           { headers }
         );
+        console.log('Order response:', response.data); // Add this debug log
         setOrderHistory(response.data.data);
       } catch (err) {
-        setError(err.message);
-        console.error("Error fetching orders:", err);
+        setError(err.response?.data?.message || err.message);
+        console.error("Error fetching orders:", err.response || err);
       }
     };
     fetchOrders();

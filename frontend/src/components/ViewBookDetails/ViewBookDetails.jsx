@@ -28,7 +28,7 @@ const ViewBookDetails = () => {
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
-    bookId: id,
+    bookid: id,
   };
 
   const handleFavourite = async () => {
@@ -43,6 +43,7 @@ const ViewBookDetails = () => {
   const handleCart = async () => {
     const response = await axios.put(
       `https://bookheaven-ovxg.onrender.com/api/v1/add-to-cart`,
+      {},
       { headers }
     );
     alert(response.data.message);
