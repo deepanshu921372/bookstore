@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 
-
 const OrderHistory = () => {
   const [orderHistory, setOrderHistory] = useState();
   const [error, setError] = useState(null);
@@ -13,22 +12,31 @@ const OrderHistory = () => {
     authorization: `Bearer ${localStorage.getItem("token")}`,
   };
 
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          "https://bookheaven-ovxg.onrender.com/api/v1/order/get-order-history",
+          `https://bookheaven-ovxg.onrender.com/api/v1/order/get-order-history`,
           { headers }
         );
-        console.log('Order response:', response.data); // Add this debug log
+        console.log("Order response:", response.data);
         setOrderHistory(response.data.data);
       } catch (err) {
-        setError(err.response?.data?.message || err.message);
-        console.error("Error fetching orders:", err.response || err);
+        console.error("Error details:", err);
+        setError(err.response?.data?.message || "Failed to fetch orders");
       }
     };
     fetchOrders();
   }, []);
+
+  if (error) {
+    return (
+      <div className="w-full h-[100%] flex items-center justify-center text-red-500">
+        Error: {error}
+      </div>
+    );
+  }
 
   return (
     <>
